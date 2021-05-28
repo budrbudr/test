@@ -1,28 +1,40 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
-  'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended'
+
+  extends: [
+    '@vue/airbnb',
+    'plugin:vue/recommended',
   ],
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-console': 'off', //process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'import/extensions': [
+      'error',
+      { vue: 'never' },
+    ],
+    'vue/max-attributes-per-line': ['error', {
+      singleline: 3,
+      multiline: {
+        max: 1,
+        allowFirstLine: false,
+      },
+    },
+    ],
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'return' },
+      { blankLine: 'always', prev: '*', next: 'block-like' },
+      { blankLine: 'always', prev: 'block-like', next: '*' },
+    ],
+    'import/prefer-default-export': 'off',
+    'import/no-cycle' : 'off',
+    'no-plusplus': 'off',
+    'no-underscore-dangle' : 'off'
   },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
-      env: {
-        mocha: true
-      }
-    }
-  ]
-}
+};
